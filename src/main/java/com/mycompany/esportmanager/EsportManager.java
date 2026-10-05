@@ -29,7 +29,33 @@ public class EsportManager {
     }
 
     public static void simulasiLatihan(Pemain pemain) {
+        System.out.println("Simulasi latihan untuk " + pemain.getNickname()
+                + " (objek asli: " + pemain.getClass().getSimpleName() + ")");
         pemain.caraLatihan();
+    }
+
+    public static void simulasiLatihan(Pemain[] daftarPemain, int jumlahPemain) {
+        System.out.println("Simulasi latihan SELURUH TIM:");
+        for (int i = 0; i < jumlahPemain; i++) {
+            simulasiLatihan(daftarPemain[i]);
+            System.out.println();
+        }
+    }
+
+    public static int isiDataContoh(Pemain[] daftarPemain, int jumlahPemain) {
+        Pemain[] contoh = {
+            new PemainML("Kairi", "Kairi Pratama", 21, "Gusion"),
+            new PemainPES("Messi10", "Rizky Maulana", 22, "Barcelona"),
+            new PemainDota("Miracle", "Dimas Saputra", 24, 9500),
+            new PemainPUBG("SniperX", "Andi Wijaya", 20, 35),
+            new PemainML("Lemon", "Bagas Nugroho", 19, "Lancelot")
+        };
+        for (Pemain p : contoh) {
+            if (jumlahPemain < daftarPemain.length) {
+                daftarPemain[jumlahPemain++] = p;
+            }
+        }
+        return jumlahPemain;
     }
 
     public static void main(String[] args) {
@@ -48,8 +74,10 @@ public class EsportManager {
                 System.out.println("1. Tambah Pemain");
                 System.out.println("2. Lihat Daftar Pemain");
                 System.out.println("3. Cari Pemain");
-                System.out.println("4. Keluar");
-                System.out.print("Pilih Menu 1-4: ");
+                System.out.println("4. Simulasi Latihan");
+                System.out.println("5. Muat Data Contoh (5 pemain)");
+                System.out.println("6. Keluar");
+                System.out.print("Pilih Menu 1-6: ");
 
                 int pilihan = scanner.nextInt();
                 scanner.nextLine();
@@ -81,27 +109,32 @@ public class EsportManager {
                                 System.out.print("Masukkan Hero Utama: ");
                                 String hero = scanner.nextLine();
                                 daftarPemain[jumlahPemain] = new PemainML(nickname, namaAsli, usia, hero);
+                                jumlahPemain++;
+                                System.out.println("Pemain berhasil ditambahkan.");
                             } else if (divisi == 2) {
                                 System.out.print("Masukkan Klub Andalan: ");
                                 String klub = scanner.nextLine();
                                 daftarPemain[jumlahPemain] = new PemainPES(nickname, namaAsli, usia, klub);
+                                jumlahPemain++;
+                                System.out.println("Pemain berhasil ditambahkan.");
                             } else if (divisi == 3) {
                                 System.out.print("Masukkan MMR: ");
                                 int mmr = scanner.nextInt();
                                 scanner.nextLine();
                                 daftarPemain[jumlahPemain] = new PemainDota(nickname, namaAsli, usia, mmr);
+                                jumlahPemain++;
+                                System.out.println("Pemain berhasil ditambahkan.");
                             } else if (divisi == 4) {
                                 System.out.print("Masukkan Jumlah Chicken Dinner: ");
                                 int chicken = scanner.nextInt();
                                 scanner.nextLine();
                                 daftarPemain[jumlahPemain] = new PemainPUBG(nickname, namaAsli, usia, chicken);
+                                jumlahPemain++;
+                                System.out.println("Pemain berhasil ditambahkan.");
                             } else {
                                 System.out.println("Divisi tidak valid, pemain tidak ditambahkan.");
-                                jumlahPemain--;
                             }
 
-                            jumlahPemain++;
-                            System.out.println("Proses tambah pemain selesai.");
                             System.out.print("Tekan Enter untuk melanjutkan...");
                             scanner.nextLine();
                         } else {
@@ -136,12 +169,12 @@ public class EsportManager {
                         if (modeCari == 1) {
                             System.out.print("Masukkan Nickname: ");
                             String kataKunci = scanner.nextLine();
-                            cariPemain(kataKunci, daftarPemain, jumlahPemain);
+                            cariPemain(kataKunci, daftarPemain, jumlahPemain); // overload versi String
                         } else if (modeCari == 2) {
                             System.out.print("Masukkan Usia: ");
                             int angkaKunci = scanner.nextInt();
                             scanner.nextLine();
-                            cariPemain(angkaKunci, daftarPemain, jumlahPemain);
+                            cariPemain(angkaKunci, daftarPemain, jumlahPemain); // overload versi int
                         } else {
                             System.out.println("Pilihan tidak valid.");
                         }
@@ -149,11 +182,49 @@ public class EsportManager {
                         scanner.nextLine();
                     }
                     case 4 -> {
+                        System.out.println("\n-- Simulasi Latihan --");
+                        if (jumlahPemain == 0) {
+                            System.out.println("Belum ada pemain yang tersimpan");
+                        } else {
+                            System.out.println("1. Latihan satu pemain");
+                            System.out.println("2. Latihan seluruh tim");
+                            System.out.print("Pilih (1/2): ");
+                            int modeSim = scanner.nextInt();
+                            scanner.nextLine();
+
+                            if (modeSim == 1) {
+                                for (int i = 0; i < jumlahPemain; i++) {
+                                    System.out.println((i + 1) + ". " + daftarPemain[i].getNickname());
+                                }
+                                System.out.print("Pilih nomor pemain: ");
+                                int no = scanner.nextInt();
+                                scanner.nextLine();
+                                if (no >= 1 && no <= jumlahPemain) {
+                                    System.out.println();
+                                    simulasiLatihan(daftarPemain[no - 1]);
+                                } else {
+                                    System.out.println("Nomor pemain tidak valid.");
+                                }
+                            } else if (modeSim == 2) {
+                                System.out.println();
+                                simulasiLatihan(daftarPemain, jumlahPemain); 
+                            } else {
+                                System.out.println("Pilihan tidak valid.");
+                            }
+                        }
+                        System.out.print("Tekan Enter untuk melanjutkan...");
+                        scanner.nextLine();
+                    }
+                    case 5 -> {
+                        jumlahPemain = isiDataContoh(daftarPemain, jumlahPemain);
+                        System.out.println("Data contoh berhasil dimuat. Total pemain: " + jumlahPemain);
+                    }
+                    case 6 -> {
                         System.out.println("Terima kasih telah menggunakan Esport Manager!");
                         isRunning = false;
                     }
                     default -> {
-                        System.out.println("Pilihan tidak valid. Silahkan masukkan angka 1-4.");
+                        System.out.println("Pilihan tidak valid. Silahkan masukkan angka 1-6.");
                     }
                 }
             }
