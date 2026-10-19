@@ -1,6 +1,6 @@
 package com.mycompany.esportmanager;
 
-public class PemainML extends Pemain {
+public class PemainML extends Pemain implements DapatBertanding, DapatStreaming {
     private String heroUtama;
 
     public PemainML(String nickname, String namaAsli, int usia, String heroUtama) {
@@ -28,5 +28,15 @@ public class PemainML extends Pemain {
     @Override
     public void caraLatihan() {
         System.out.println("-> Info Latihan: Scrim draft pick dan drill hero " + this.heroUtama + ".");
+    }
+
+    @Override
+    public void ikutTurnamen() {
+        System.out.println("-> [TURNAMEN] " + this.getNickname() + " mendaftar turnamen MPL bersama tim, hero andalan " + this.heroUtama + ".");
+    }
+
+    @Override
+    public void mulaiStreaming() {
+        System.out.println("-> [STREAMING] Live streaming rank Mythic Glory dengan hero " + this.heroUtama + ".");
     }
 }
