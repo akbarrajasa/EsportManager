@@ -1,6 +1,6 @@
 package com.mycompany.esportmanager;
 
-public class PemainDota extends Pemain {
+public class PemainDota extends Pemain implements DapatBertanding {
     private int mmr;
 
     public PemainDota(String nickname, String namaAsli, int usia, int mmr) {
@@ -29,5 +29,10 @@ public class PemainDota extends Pemain {
     @Override
     public void caraLatihan() {
         System.out.println("-> Info Latihan: Scrim 5v5 dan latihan last hit.");
+    }
+
+    @Override
+    public void ikutTurnamen() {
+        System.out.println("-> [TURNAMEN] " + this.getNickname() + " (MMR " + this.mmr + ") ikut kualifikasi The International.");
     }
 }
