@@ -1,6 +1,6 @@
 package com.mycompany.esportmanager;
 
-public class PemainPUBG extends Pemain {
+public class PemainPUBG extends Pemain implements DapatStreaming {
     private int chickenDinner;
 
     public PemainPUBG(String nickname, String namaAsli, int usia, int chickenDinner) {
@@ -29,5 +29,10 @@ public class PemainPUBG extends Pemain {
     @Override
     public void caraLatihan() {
         System.out.println("-> Info Latihan: Scrim 16 tim dan latihan rotasi zona.");
+    }
+
+    @Override
+    public void mulaiStreaming() {
+        System.out.println("-> [STREAMING] " + this.getNickname() + " live streaming dengan " + this.chickenDinner + " Chicken Dinner.");
     }
 }
