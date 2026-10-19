@@ -1,6 +1,6 @@
 package com.mycompany.esportmanager;
 
-public class PemainPES extends Pemain {
+public class PemainPES extends Pemain implements DapatBertanding {
     private String klubAndalan;
 
     public PemainPES(String nickname, String namaAsli, int usia, String klubAndalan) {
@@ -28,5 +28,10 @@ public class PemainPES extends Pemain {
     @Override
     public void caraLatihan() {
         System.out.println("-> Info Latihan: Sparring 1v1 online memakai klub " + this.klubAndalan + ".");
+    }
+
+    @Override
+    public void ikutTurnamen() {
+        System.out.println("-> [TURNAMEN] " + this.getNickname() + " ikut turnamen eFootball dengan klub " + this.klubAndalan + ".");
     }
 }
