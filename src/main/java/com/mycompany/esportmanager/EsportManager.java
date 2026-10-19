@@ -150,6 +150,15 @@ public class EsportManager {
                                 System.out.print((i + 1) + ". ");
                                 daftarPemain[i].tampilkanInfo();
                                 simulasiLatihan(daftarPemain[i]);
+
+                                if (daftarPemain[i] instanceof DapatBertanding) {
+                                    DapatBertanding petanding = (DapatBertanding) daftarPemain[i];
+                                    petanding.ikutTurnamen();
+                                }
+                                if (daftarPemain[i] instanceof DapatStreaming) {
+                                    DapatStreaming streamer = (DapatStreaming) daftarPemain[i];
+                                    streamer.mulaiStreaming();
+                                }
                                 System.out.println("");
                             }
 
