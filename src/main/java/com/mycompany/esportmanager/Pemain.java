@@ -1,6 +1,6 @@
 package com.mycompany.esportmanager;
 
-public class Pemain {
+public abstract class Pemain {
     private String nickname;
     private String namaAsli;
     private int usia;
@@ -54,7 +54,5 @@ public class Pemain {
                           this.nickname, this.namaAsli, this.usia);
     }
 
-    public void caraLatihan() {
-        System.out.println("-> Info Latihan: Latihan umum bersama tim.");
-    }
+    public abstract void caraLatihan();
 }
