@@ -3,9 +3,10 @@ package com.mycompany.esportmanager;
 public class PemainPUBG extends Pemain implements DapatStreaming {
     private int chickenDinner;
 
-    public PemainPUBG(String nickname, String namaAsli, int usia, int chickenDinner) {
+    public PemainPUBG(String nickname, String namaAsli, int usia, int chickenDinner) throws Exception {
         super(nickname, namaAsli, usia);
-        this.setChickenDinner(chickenDinner);
+        if (chickenDinner < 0) throw new Exception("Jumlah Chicken Dinner tidak boleh negatif!");
+                this.setChickenDinner(chickenDinner);
     }
 
     public int getChickenDinner() { return this.chickenDinner; }
