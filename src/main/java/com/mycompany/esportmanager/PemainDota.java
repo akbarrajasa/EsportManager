@@ -3,9 +3,10 @@ package com.mycompany.esportmanager;
 public class PemainDota extends Pemain implements DapatBertanding {
     private int mmr;
 
-    public PemainDota(String nickname, String namaAsli, int usia, int mmr) {
+    public PemainDota(String nickname, String namaAsli, int usia, int mmr) throws Exception {
         super(nickname, namaAsli, usia);
-        this.setMmr(mmr);
+        if (mmr < 0 || mmr > 15000) throw new Exception("MMR harus antara 0-15000!");
+                this.setMmr(mmr);
     }
 
     public int getMmr() { return this.mmr; }
