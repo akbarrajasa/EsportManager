@@ -3,9 +3,10 @@ package com.mycompany.esportmanager;
 public class PemainPES extends Pemain implements DapatBertanding {
     private String klubAndalan;
 
-    public PemainPES(String nickname, String namaAsli, int usia, String klubAndalan) {
+    public PemainPES(String nickname, String namaAsli, int usia, String klubAndalan) throws Exception {
         super(nickname, namaAsli, usia);
-        this.setKlubAndalan(klubAndalan);
+        if (klubAndalan == null || klubAndalan.trim().isEmpty()) throw new Exception("Klub andalan tidak boleh kosong!");
+                this.setKlubAndalan(klubAndalan);
     }
 
     public String getKlubAndalan() { return this.klubAndalan; }
