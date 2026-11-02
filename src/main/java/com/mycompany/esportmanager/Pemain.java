@@ -7,7 +7,16 @@ public abstract class Pemain {
 
     private static int totalPemainBerhasilDibuat = 0;
 
-    public Pemain(String nickname, String namaAsli, int usia) {
+    public Pemain(String nickname, String namaAsli, int usia) throws Exception {
+        if (nickname == null || nickname.trim().isEmpty()) {
+            throw new Exception("Nickname tidak boleh kosong!");
+        }
+        if (namaAsli == null || namaAsli.trim().isEmpty()) {
+            throw new Exception("Nama asli tidak boleh kosong!");
+        }
+        if (usia < 15 || usia > 40) {
+            throw new Exception("Usia harus antara 15-40 tahun!");
+        }
         this.setNickname(nickname);
         this.setNamaAsli(namaAsli);
         this.setUsia(usia);
