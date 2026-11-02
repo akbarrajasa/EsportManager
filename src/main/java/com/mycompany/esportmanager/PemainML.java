@@ -3,9 +3,10 @@ package com.mycompany.esportmanager;
 public class PemainML extends Pemain implements DapatBertanding, DapatStreaming {
     private String heroUtama;
 
-    public PemainML(String nickname, String namaAsli, int usia, String heroUtama) {
+    public PemainML(String nickname, String namaAsli, int usia, String heroUtama) throws Exception {
         super(nickname, namaAsli, usia);
-        this.setHeroUtama(heroUtama);
+        if (heroUtama == null || heroUtama.trim().isEmpty()) throw new Exception("Hero utama tidak boleh kosong!");
+                this.setHeroUtama(heroUtama);
     }
 
     public String getHeroUtama() { return this.heroUtama; }
